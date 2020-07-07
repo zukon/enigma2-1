@@ -450,6 +450,9 @@ long eHdmiCEC::translateKey(unsigned char code)
 		case 0x31:
 			key = 0x193;
 			break;
+		case 0x35:     /* Display Information */
+			key = 0x189;
+			break;
 		case 0x44:
 			key = 0xcf;
 			break;
