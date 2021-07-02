@@ -52,9 +52,11 @@ def getMultibootslots():
 						if path.exists(device):
 							slot["device"] = device
 							slot["startupfile"] = path.basename(file)
-							if "sda" in line:
+							if "sda" in line and not "rootsubdir" in line:
 								slot["kernel"] = "/dev/sda%s" % line.split("sda", 1)[1].split(" ", 1)[0]
 								slot["rootsubdir"] = None
+							elif "mmcblk0p16" not in line and "rootsubdir" in line or "mmcblk0p23" not in line and "rootsubdir" in line:
+								slot["kernel"] = "%s" % device
 							else:
 								slot["kernel"] = "%sp%s" % (device.split("p")[0], int(device.split("p")[1]) - 1)
 							if "rootsubdir" in line:
